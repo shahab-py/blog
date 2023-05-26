@@ -1,0 +1,2 @@
+# blog
+Practice the DRF
