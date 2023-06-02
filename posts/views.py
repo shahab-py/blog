@@ -1,11 +1,13 @@
 from django.shortcuts import render
+
+from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
 
 from .models import Post
-from .serializers import PostSerializer
+from .serializers import PostSerializer, CommentSerializer
 
 class PostView(APIView):
     
@@ -20,3 +22,20 @@ class PostView(APIView):
             srz_data.save()
             return Response(srz_data.data, status=status.HTTP_201_CREATED)
         return Response(srz_data.errors, status = status.HTTP_400_BAD_REQUEST)
+    
+    
+    
+    
+class CommentView(APIView):
+    
+    def get(self, request, post_id):
+        comments = Comment.objects.get(pk=post_id)
+        srz_data = CommentSerializer(comments, many=True)
+        return Response(srz_data.data, status=status.HTTP_200_OK)
+    
+    def post(self, request):
+        srz_data = CommentSerializer(data = request.data)
+        if srz_data.is_valid():
+            srz_data.save()
+            return Response(srz_data.data, status=status.HTTP_200_OK)
+        return Response(srz_data.errors, status=status.HTTP_400_BAD_REQUEST)

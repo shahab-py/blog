@@ -16,3 +16,4 @@ class UserRegisterView(APIView):
             srz_data.create(srz_data.validated_data)
             return Response(srz_data.data, status=status.HTTP_201_CREATED)
         return Response(srz_data.error_messages, status=status.HTTP_400_BAD_REQUEST)
+    

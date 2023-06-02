@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
    
     'accounts.apps.AccountsConfig', 
-    'post.apps.PostConfig',
+    'posts.apps.PostsConfig',
     'rest_framework',
 ]
 
